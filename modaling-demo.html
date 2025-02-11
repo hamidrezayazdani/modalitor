@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modaling.js - Modern Modal Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="modaling.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+        
+        .demo-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📦 Modaling.js</h1>
+            <p>A modern, accessible modal system with rich animations and features</p>
+            <a href="https://github.com/yourusername/modaling" class="btn">View on GitHub</a>
+        </header>
+
+        <div class="feature-list">
+            <div class="feature-item">
+                <h3>🎨 Rich Animations</h3>
+                <p>Multiple built-in animations with smooth transitions</p>
+            </div>
+            <div class="feature-item">
+                <h3>♿️ Accessibility</h3>
+                <p>ARIA support and keyboard navigation</p>
+            </div>
+            <div class="feature-item">
+                <h3>🔗 URL Support</h3>
+                <p>Modal state preserved in URL hash</p>
+            </div>
+            <div class="feature-item">
+                <h3>📱 Responsive</h3>
+                <p>Works great on all devices</p>
+            </div>
+        </div>
+
+        <section class="demo-section">
+            <h2>Basic Examples</h2>
+            <div class="demo-grid">
+                <button class="btn" data-modal-target="basic-modal">Basic Modal</button>
+                <button class="btn" data-modal-target="animated-modal" data-modal-animation="zoom">Zoom Animation</button>
+                <button class="btn" data-modal-target="large-modal" data-modal-size="lg">Large Modal</button>
+                <button class="btn" data-modal-target="roadrunner-modal" data-modal-animation="roadrunner">Roadrunner</button>
+            </div>
+        </section>
+
+        <section class="demo-section">
+            <h2>Animation Examples</h2>
+            <div class="demo-grid">
+                <button class="btn" data-modal-target="flip-modal" data-modal-animation="flip">Flip</button>
+                <button class="btn" data-modal-target="door-modal" data-modal-animation="door">Door</button>
+                <button class="btn" data-modal-target="unfold-modal" data-modal-animation="unfold">Unfold</button>
+                <button class="btn" data-modal-target="rotate-modal" data-modal-animation="rotate">Rotate</button>
+            </div>
+        </section>
+
+        <section class="demo-section">
+            <h2>Usage Example</h2>
+            <pre><code class="language-javascript">
+// Basic initialization
+const modal = new Modaling({
+    id: 'my-modal',
+    animation: 'zoom',
+    size: 'md',
+    closeOnOverlay: true,
+    closeOnEscape: true
+});
+
+// Show the modal
+modal.show();
+
+// Hide the modal
+modal.hide();
+
+// Data attributes usage
+&lt;button 
+    data-modal-target="my-modal"
+    data-modal-animation="zoom"
+    data-modal-size="lg"
+>
+    Open Modal
+&lt;/button>
+            </code></pre>
+        </section>
+    </div>
+
+    <!-- Modal Templates -->
+    <div id="basic-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Basic Modal</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>This is a basic modal example with default settings.</p>
+        </div>
+        <div class="modaling-footer">
+            <button class="btn modaling-close">Close</button>
+        </div>
+    </div>
+
+    <div id="animated-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Zoom Animation</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>This modal uses the zoom animation effect.</p>
+        </div>
+    </div>
+
+    <div id="large-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Large Modal</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>This is a large-sized modal example.</p>
+        </div>
+    </div>
+
+    <!-- More modal templates... -->
+    <div id="roadrunner-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Roadrunner Animation</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>Beep beep! Watch this cool animation.</p>
+        </div>
+    </div>
+
+    <div id="flip-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Flip Animation</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>This modal flips into view!</p>
+        </div>
+    </div>
+
+    <div id="door-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Door Animation</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>Open sesame!</p>
+        </div>
+    </div>
+
+    <div id="unfold-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Unfold Animation</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>Watch this modal unfold smoothly.</p>
+        </div>
+    </div>
+
+    <div id="rotate-modal" class="modaling">
+        <div class="modaling-header">
+            <h2 class="modaling-title">Rotate Animation</h2>
+            <button class="modaling-close"></button>
+        </div>
+        <div class="modaling-content">
+            <p>Round and round we go!</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="modaling.js"></script>
+</body>
+</html>

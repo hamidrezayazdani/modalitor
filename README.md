@@ -1,4 +1,4 @@
-# 📦 Modaling.js
+# 📦 Modalitor.js
 
 A modern, accessible modal system with focus management, URL hash support, and rich animations.
 
@@ -16,15 +16,15 @@ A modern, accessible modal system with focus management, URL hash support, and r
 ## 📥 Installation
 
 ```bash
-npm install modaling
+npm install modalitor
 # or
-yarn add modaling
+yarn add modalitor
 ```
 
 Include the files directly:
 ```html
-<link rel="stylesheet" href="modaling.css">
-<script src="modaling.js"></script>
+<link rel="stylesheet" href="modalitor.css">
+<script src="modalitor.js"></script>
 ```
 
 ## 🚀 Quick Start
@@ -34,23 +34,23 @@ Include the files directly:
 <button data-modal-target="my-modal">Open Modal</button>
 
 <!-- Modal template -->
-<div id="my-modal" class="modaling">
-    <div class="modaling-header">
-        <h2 class="modaling-title">Modal Title</h2>
-        <button class="modaling-close"></button>
+<div id="my-modal" class="modalitor">
+    <div class="modalitor-header">
+        <h2 class="modalitor-title">Modal Title</h2>
+        <button class="modalitor-close"></button>
     </div>
-    <div class="modaling-content">
+    <div class="modalitor-content">
         Modal content goes here
     </div>
-    <div class="modaling-footer">
-        <button class="modaling-close">Close</button>
+    <div class="modalitor-footer">
+        <button class="modalitor-close">Close</button>
     </div>
 </div>
 ```
 
 ```javascript
 // JavaScript initialization
-const modal = new Modaling({
+const modal = new Modalitor({
     id: 'my-modal',
     animation: 'zoom',
     size: 'md'
@@ -92,12 +92,12 @@ modal.show();
 
 ## 📱 Mobile Support
 
-Modaling automatically switches to optimized animations on mobile devices for better performance. The default mobile animation is a simple slide-up regardless of the specified animation type.
+Modalitor automatically switches to optimized animations on mobile devices for better performance. The default mobile animation is a simple slide-up regardless of the specified animation type.
 
 ## 🎯 Methods
 
 ```javascript
-const modal = new Modaling({ id: 'my-modal' });
+const modal = new Modalitor({ id: 'my-modal' });
 
 modal.show();      // Show the modal
 modal.hide();      // Hide the modal
@@ -112,7 +112,7 @@ if (modal.isVisible()) {
 ## 🔄 Events
 
 ```javascript
-new Modaling({
+new Modalitor({
     id: 'my-modal',
     onShow: () => console.log('Modal shown'),
     onHide: () => console.log('Modal hidden')

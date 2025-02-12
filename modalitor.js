@@ -1,5 +1,5 @@
 /**
- * @name Modaling
+ * @name Modalitor
  * @author HamidReza Yazdani
  * @license MIT
  * @version 1.0.0
@@ -16,7 +16,7 @@ const ANIMATION_DURATIONS = {
   UNFOLD: 600
 };
 
-class Modaling {
+class Modalitor {
   static instances = new Map();
   static zIndex = 1000;
   static activeModal = null;
@@ -30,14 +30,14 @@ class Modaling {
     }
 
     // Return existing instance if available
-    const existingInstance = Modaling.instances.get(options.id);
+    const existingInstance = Modalitor.instances.get(options.id);
     if (existingInstance) {
       return existingInstance;
     }
 
     // Calculate scrollbar width once
-    if (Modaling.scrollbarWidth === null) {
-      Modaling.scrollbarWidth = this.calculateScrollbarWidth();
+    if (Modalitor.scrollbarWidth === null) {
+      Modalitor.scrollbarWidth = this.calculateScrollbarWidth();
     }
 
     // Default options
@@ -61,7 +61,7 @@ class Modaling {
     this.isClosing = false;
 
     this.initializeModal();
-    Modaling.instances.set(this.options.id, this);
+    Modalitor.instances.set(this.options.id, this);
     this.handleInitialHash();
   }
 
@@ -90,9 +90,9 @@ class Modaling {
 
   createOverlay() {
     this.overlay = document.createElement('div');
-    this.overlay.className = 'modaling-overlay';
+    this.overlay.className = 'modalitor-overlay';
     this.overlay.setAttribute('tabindex', '-1');
-    this.overlay.id = `modaling-overlay-${this.options.id}`;
+    this.overlay.id = `modalitor-overlay-${this.options.id}`;
 
     this.modal = document.getElementById(this.options.id);
     if (!this.modal) {
@@ -117,7 +117,7 @@ class Modaling {
       this.modal.setAttribute('aria-describedby', describedBy);
     }
 
-    this.modal.classList.add('modaling', `modaling-${size}`);
+    this.modal.classList.add('modalitor', `modalitor-${size}`);
 
     if (animation !== 'none') {
       this.modal.classList.add(`animation-${animation}`);
@@ -132,7 +132,7 @@ class Modaling {
   }
 
   setupCloseButton() {
-    const closeBtn = this.modal.querySelector('.modaling-close');
+    const closeBtn = this.modal.querySelector('.modalitor-close');
     if (closeBtn) {
       closeBtn.setAttribute('aria-label', 'Close modal');
       closeBtn.addEventListener('click', () => this.hide());
@@ -227,31 +227,31 @@ class Modaling {
   }
 
   saveScrollPosition() {
-    Modaling.scrollPosition = window.scrollY;
+    Modalitor.scrollPosition = window.scrollY;
   }
 
   handleScrollLock(restore = false) {
     if (!this.options.preventScroll) return;
 
     if (restore) {
-      Modaling.modalCount--;
+      Modalitor.modalCount--;
       
-      if (Modaling.modalCount === 0) {
+      if (Modalitor.modalCount === 0) {
         document.body.style.overflow = '';
         document.body.style.paddingRight = '';
         
-        if (Modaling.scrollPosition !== null) {
-          window.scrollTo(0, Modaling.scrollPosition);
-          Modaling.scrollPosition = null;
+        if (Modalitor.scrollPosition !== null) {
+          window.scrollTo(0, Modalitor.scrollPosition);
+          Modalitor.scrollPosition = null;
         }
       }
     } else {
-      if (Modaling.modalCount === 0) {
-        Modaling.scrollPosition = window.scrollY;
+      if (Modalitor.modalCount === 0) {
+        Modalitor.scrollPosition = window.scrollY;
         document.body.style.overflow = 'hidden';
-        document.body.style.paddingRight = `${Modaling.scrollbarWidth}px`;
+        document.body.style.paddingRight = `${Modalitor.scrollbarWidth}px`;
       }
-      Modaling.modalCount++;
+      Modalitor.modalCount++;
     }
   }
 
@@ -261,7 +261,7 @@ class Modaling {
     this.focusedElementBeforeModal = document.activeElement;
     this.updateZIndex();
 
-    if (Modaling.modalCount === 0) {
+    if (Modalitor.modalCount === 0) {
       this.saveScrollPosition();
     }
 
@@ -270,7 +270,7 @@ class Modaling {
     this.handleScrollLock();
     this.updateAriaAttributes(false);
 
-    Modaling.activeModal = this;
+    Modalitor.activeModal = this;
     this.options.onShow();
   }
 
@@ -296,15 +296,15 @@ class Modaling {
     this.handleScrollLock(true);
     this.updateAriaAttributes(true);
 
-    if (Modaling.activeModal === this) {
-      Modaling.activeModal = null;
+    if (Modalitor.activeModal === this) {
+      Modalitor.activeModal = null;
     }
   }
 
   updateZIndex() {
-    Modaling.zIndex += 2;
-    this.overlay.style.zIndex = String(Modaling.zIndex);
-    this.modal.style.zIndex = String(Modaling.zIndex + 1);
+    Modalitor.zIndex += 2;
+    this.overlay.style.zIndex = String(Modalitor.zIndex);
+    this.modal.style.zIndex = String(Modalitor.zIndex + 1);
   }
 
   showModalWithAnimation() {
@@ -338,7 +338,7 @@ class Modaling {
   }
 
   isTopModal() {
-    const activeModals = Array.from(Modaling.instances.values())
+    const activeModals = Array.from(Modalitor.instances.values())
       .filter(modal => modal.isVisible())
       .sort((a, b) => {
         return parseInt(b.modal.style.zIndex || '0') - parseInt(a.modal.style.zIndex || '0');
@@ -355,15 +355,15 @@ class Modaling {
       this.hide();
     }
     this.overlay.remove();
-    Modaling.instances.delete(this.options.id);
+    Modalitor.instances.delete(this.options.id);
     
     if (this.isVisible()) {
-      Modaling.modalCount = Math.max(0, Modaling.modalCount - 1);
+      Modalitor.modalCount = Math.max(0, Modalitor.modalCount - 1);
     }
   }
 
   static getAllInstances() {
-    return Modaling.instances;
+    return Modalitor.instances;
   }
 
   static handlePageLoad() {
@@ -373,14 +373,14 @@ class Modaling {
     const prefix = 'modal-';
     if (hash.startsWith(prefix)) {
       const modalId = hash.slice(prefix.length);
-      const modal = Modaling.instances.get(modalId);
+      const modal = Modalitor.instances.get(modalId);
       if (modal) {
         modal.show();
       } else {
         const modalElement = document.getElementById(modalId);
         if (modalElement) {
           const options = { id: modalId };
-          const newModal = new Modaling(options);
+          const newModal = new Modalitor(options);
           newModal.show();
         }
       }
@@ -407,20 +407,20 @@ document.addEventListener('click', (e) => {
     hashPrefix: trigger.getAttribute('data-modal-hash-prefix') || 'modal-'
   };
 
-  const modal = new Modaling(options);
+  const modal = new Modalitor(options);
   modal.show();
 });
 
 // Handle initial page load
 document.addEventListener('DOMContentLoaded', () => {
-  Modaling.handlePageLoad();
+  Modalitor.handlePageLoad();
 });
 
 // For usage in module systems
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = Modaling;
+  module.exports = Modalitor;
 } else if (typeof define === 'function' && define.amd) {
-  define([], function() { return Modaling; });
+  define([], function() { return Modalitor; });
 } else {
-  window.Modaling = Modaling;
+  window.Modalitor = Modalitor;
 }

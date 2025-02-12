@@ -2,7 +2,7 @@
  * @name Modalitor
  * @author HamidReza Yazdani
  * @license MIT
- * @version 1.0.0
+ * @version 1.0.1
  * @description A modern, accessible modal system with focus management, URL hash support, and rich animations
  */
 

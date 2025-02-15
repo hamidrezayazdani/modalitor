@@ -21,6 +21,7 @@
   width: 100%;
   margin: 1rem;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .modalitor.active {
@@ -48,6 +49,10 @@
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
 }
 
 .modalitor-title {
@@ -73,6 +78,10 @@
   justify-content: flex-end;
   gap: 0.5rem;
   flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: #fff;
 }
 
 /* Close button */
@@ -165,22 +174,22 @@
 }
 
 @keyframes zoomIn {
-  from { 
+  from {
     transform: translate(-50%, -50%) scale3d(0.3, 0.3, 0.3);
     opacity: 0;
   }
-  to { 
+  to {
     transform: translate(-50%, -50%) scale3d(1, 1, 1);
     opacity: 1;
   }
 }
 
 @keyframes zoomOut {
-  from { 
+  from {
     transform: translate(-50%, -50%) scale3d(1, 1, 1);
     opacity: 1;
   }
-  to { 
+  to {
     transform: translate(-50%, -50%) scale3d(0.3, 0.3, 0.3);
     opacity: 0;
   }
